@@ -1,9 +1,14 @@
 import os
 
 # 扫描django app下的task
-# import djcelery
-# djcelery.setup_loader()
+import djcelery
+
+# 定时任务依赖
+from datetime import timedelta
+from celery.schedules import crontab
+
 from .debug import DEBUG
+djcelery.setup_loader()
 
 # 不同任务队列配置
 from kombu import Exchange, Queue
@@ -32,7 +37,7 @@ else:
 # }
 
 # 默认配置RabbitMQ为Celery的brokers
-BROKER_URL = os.getenv("CELERY_BROKER_URL")
+BROKER_URL = os.getenv("CELERY_BROKER_URL", "amqp://smp:smp_system_12345@demo.zhouhua.me:5672//")
 # redis的broker备用
 # BROKER_URL = 'redis://localhost:6379'
 
@@ -50,7 +55,16 @@ CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
-CELERYBEAT_SCHEDULE = {}
+CELERYBEAT_SCHEDULE = {
+    'drink': {
+        'task': 'apps.demo.tasks.drink',
+        'schedule': timedelta(hours=1)
+    },
+    'breakfast': {
+        'task': 'apps.demo.tasks.breakfast',
+        'schedule': crontab(hour=8, minute=00)
+    },
+}
 
 CELERY_CREATE_MISSING_QUEUES = True
 CELERYD_PREFETCH_MULTIPLIER = 1

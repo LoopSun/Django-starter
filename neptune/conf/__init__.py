@@ -4,7 +4,7 @@ from .debug import *
 from .database import *
 from .log import *
 from .static import *
-from .celery import *
 from .api import *
 from .customer import *
 from .email import *
+from .celery import *

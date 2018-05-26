@@ -14,8 +14,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'celery',
     'raven.contrib.django.raven_compat',
+    'celery',
+    'djcelery',
+    'apps.demo',
+    'apps.apiv1',
 ]
 
 MIDDLEWARE = [
@@ -81,4 +84,3 @@ USE_TZ = True
 
 # default login url
 LOGIN_URL = os.getenv('LOGIN_URL', '/login/')
-

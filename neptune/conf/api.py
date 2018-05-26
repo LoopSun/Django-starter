@@ -1,4 +1,4 @@
-#-*-coding:utf-8-*-
+# -*-coding:utf-8-*-
 __author__ = 'loopsun'
 
 import datetime
@@ -15,6 +15,7 @@ JWT_PUBLIC_KEY = os.path.join(BASE_DIR, 'neptune', 'conf', 'keys', 'api_signatur
 DATA_PRIVATE_KEY = os.path.join(BASE_DIR, 'neptune', 'conf', 'keys', 'api_data', 'key.pem')
 DATA_PUBLIC_KEY = os.path.join(BASE_DIR, 'neptune', 'conf', 'keys', 'api_data', 'public.pem')
 
+
 def load_key(key_path, key_type):
     key_obj = None
     with open(key_path, 'rb') as key_file:
@@ -24,21 +25,22 @@ def load_key(key_path, key_type):
             key_obj = load_pem_public_key(key_file.read(), backend=default_backend())
     return key_obj
 
+
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':
-    'rest_framework_jwt.utils.jwt_encode_handler',
+        'rest_framework_jwt.utils.jwt_encode_handler',
 
     'JWT_DECODE_HANDLER':
-    'rest_framework_jwt.utils.jwt_decode_handler',
+        'rest_framework_jwt.utils.jwt_decode_handler',
 
     'JWT_PAYLOAD_HANDLER':
-    'rest_framework_jwt.utils.jwt_payload_handler',
+        'rest_framework_jwt.utils.jwt_payload_handler',
 
     'JWT_PAYLOAD_GET_USER_ID_HANDLER':
-    'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
+        'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
 
     'JWT_RESPONSE_PAYLOAD_HANDLER':
-    'rest_framework_jwt.utils.jwt_response_payload_handler',
+        'rest_framework_jwt.utils.jwt_response_payload_handler',
 
     'JWT_SECRET_KEY': "ef6(z5-u!w@*y1(ot^3tqw20%_*8311iw_so#w_e_k=6-l&qkj",
     'JWT_GET_USER_SECRET_KEY': None,
@@ -59,7 +61,6 @@ JWT_AUTH = {
     'JWT_AUTH_COOKIE': None,
 
 }
-
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
